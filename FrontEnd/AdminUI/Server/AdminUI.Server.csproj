@@ -8,9 +8,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.7" />
+		<PackageReference Include="Quartz.Extensions.Hosting" Version="3.6.2" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\BackEnd\BackEnd.DAL\BackEnd.DAL.csproj" />
+		<ProjectReference Include="..\..\..\Shared\Shared\Shared.csproj" />
 		<ProjectReference Include="..\Client\AdminUI.Client.csproj" />
 		<ProjectReference Include="..\Shared\AdminUI.Shared.csproj" />
 	</ItemGroup>
