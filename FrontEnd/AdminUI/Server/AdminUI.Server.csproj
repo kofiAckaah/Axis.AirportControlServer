@@ -13,6 +13,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\BackEnd\BackEnd.DAL\BackEnd.DAL.csproj" />
+		<ProjectReference Include="..\..\..\BackEnd\BackEnd.Infrastructure\BackEnd.Infrastructure.csproj" />
+		<ProjectReference Include="..\..\..\BackEnd\BackEnd.Shared\BackEnd.Shared.csproj" />
 		<ProjectReference Include="..\..\..\Shared\Shared\Shared.csproj" />
 		<ProjectReference Include="..\Client\AdminUI.Client.csproj" />
 		<ProjectReference Include="..\Shared\AdminUI.Shared.csproj" />

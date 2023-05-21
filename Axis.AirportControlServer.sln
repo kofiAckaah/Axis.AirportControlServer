@@ -7,27 +7,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackEnd", "BackEnd", "{4C69
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{381158DD-FD49-49FB-98CE-F6D4DBF82299}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminUI.Client", "FrontEnd\AdminUI\Client\AdminUI.Client.csproj", "{0C88D7E4-D23D-4F92-AE7B-3617F709903E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminUI.Client", "FrontEnd\AdminUI\Client\AdminUI.Client.csproj", "{0C88D7E4-D23D-4F92-AE7B-3617F709903E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminUI.Server", "FrontEnd\AdminUI\Server\AdminUI.Server.csproj", "{C0D30036-5638-4417-865C-10685FB08390}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminUI.Server", "FrontEnd\AdminUI\Server\AdminUI.Server.csproj", "{C0D30036-5638-4417-865C-10685FB08390}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminUI.Shared", "FrontEnd\AdminUI\Shared\AdminUI.Shared.csproj", "{E061DBFD-0599-42F4-8F11-A54E27372E78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminUI.Shared", "FrontEnd\AdminUI\Shared\AdminUI.Shared.csproj", "{E061DBFD-0599-42F4-8F11-A54E27372E78}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B2677DE4-87AA-4A84-A2E1-02669788F6C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd.DataDomain", "BackEnd\BackEnd.DataDomain\BackEnd.DataDomain.csproj", "{7DE98192-570C-416C-AB12-A3C3481F97A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd.DataDomain", "BackEnd\BackEnd.DataDomain\BackEnd.DataDomain.csproj", "{7DE98192-570C-416C-AB12-A3C3481F97A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd.DAL", "BackEnd\BackEnd.DAL\BackEnd.DAL.csproj", "{63726549-A02E-401A-8C00-B5B9BA4F178E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd.DAL", "BackEnd\BackEnd.DAL\BackEnd.DAL.csproj", "{63726549-A02E-401A-8C00-B5B9BA4F178E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd.Shared", "BackEnd\BackEnd.Shared\BackEnd.Shared.csproj", "{10B98685-971B-42BC-B118-B4F608987C4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd.Shared", "BackEnd\BackEnd.Shared\BackEnd.Shared.csproj", "{10B98685-971B-42BC-B118-B4F608987C4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd.Infrastructure", "BackEnd\BackEnd.Infrastructure\BackEnd.Infrastructure.csproj", "{A4E6426A-842A-4F7E-B269-33685B286C64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd.Infrastructure", "BackEnd\BackEnd.Infrastructure\BackEnd.Infrastructure.csproj", "{A4E6426A-842A-4F7E-B269-33685B286C64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared\Shared.csproj", "{1AA2BB63-4867-4BC7-8AA4-38D8B6E31F97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared\Shared.csproj", "{1AA2BB63-4867-4BC7-8AA4-38D8B6E31F97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminUI.Infrastructure", "FrontEnd\AdminUI.Infrastructure\AdminUI.Infrastructure.csproj", "{E56E0544-DC65-4999-8355-C1FD543B63AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminUI.Infrastructure", "FrontEnd\AdminUI.Infrastructure\AdminUI.Infrastructure.csproj", "{E56E0544-DC65-4999-8355-C1FD543B63AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd.Core", "BackEnd\BackEnd.Core\BackEnd.Core.csproj", "{82686104-C0AD-43F7-8A8B-5C499543E04C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd.Core", "BackEnd\BackEnd.Core\BackEnd.Core.csproj", "{82686104-C0AD-43F7-8A8B-5C499543E04C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AircraftAPI", "AircraftAPI", "{8C507C16-CBAE-4CE0-A090-F6E32B3610EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftAPI", "AircraftAPI\AircraftAPI\AircraftAPI.csproj", "{2F6E42E8-2CC3-4569-82D0-5CB6A0367592}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,10 @@ Global
 		{82686104-C0AD-43F7-8A8B-5C499543E04C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82686104-C0AD-43F7-8A8B-5C499543E04C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82686104-C0AD-43F7-8A8B-5C499543E04C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F6E42E8-2CC3-4569-82D0-5CB6A0367592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F6E42E8-2CC3-4569-82D0-5CB6A0367592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F6E42E8-2CC3-4569-82D0-5CB6A0367592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F6E42E8-2CC3-4569-82D0-5CB6A0367592}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +98,7 @@ Global
 		{1AA2BB63-4867-4BC7-8AA4-38D8B6E31F97} = {B2677DE4-87AA-4A84-A2E1-02669788F6C8}
 		{E56E0544-DC65-4999-8355-C1FD543B63AB} = {381158DD-FD49-49FB-98CE-F6D4DBF82299}
 		{82686104-C0AD-43F7-8A8B-5C499543E04C} = {4C692BDC-6D72-4E14-A2E1-44041704F70D}
+		{2F6E42E8-2CC3-4569-82D0-5CB6A0367592} = {8C507C16-CBAE-4CE0-A090-F6E32B3610EB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FB9F91B-6DCB-4F17-97EC-BA72AC43B754}

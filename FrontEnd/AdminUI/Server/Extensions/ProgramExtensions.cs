@@ -1,6 +1,9 @@
 ﻿using AdminUI.Server.Services;
 using BackEnd.DAL.DbContexts;
+using BackEnd.DAL.DbSeeding;
 using BackEnd.DataDomain.Entities;
+using BackEnd.Infrastructure.Services;
+using BackEnd.Shared.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +23,9 @@ namespace AdminUI.Server.Extensions
             services.AddDatabase(configurationManager);
             services.AddIdentity();
             services.ConfigureAuth();
+            services.GetApplicationSettings(configurationManager);
+
+            services.AddBackEndServices();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -54,6 +60,8 @@ namespace AdminUI.Server.Extensions
             app.MapControllers();
             app.MapFallbackToFile("index.html");
 
+            app.Initialize();
+
 
             return app;
         }
@@ -65,7 +73,7 @@ namespace AdminUI.Server.Extensions
             services.AddOptions();
             services.AddDbContext<ControlServerDbContext>(options 
                 => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-            //services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
+            services.AddScoped<ISeeder, Seeder>();
         }
 
         private static void AddIdentity(this IServiceCollection services)
@@ -85,11 +93,40 @@ namespace AdminUI.Server.Extensions
             services.AddDataProtection();
         }
 
+        private static void AddBackEndServices(this IServiceCollection services)
+        {
+            services.AddScoped(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+        }
 
         private static void ConfigureQuartz(this IServiceCollection services)
         {
             services.AddQuartz();
         }
+
+        private static AppConfiguration GetApplicationSettings(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var applicationSettingsConfiguration = configuration.GetSection(nameof(AppConfiguration));
+            services.Configure<AppConfiguration>(applicationSettingsConfiguration);
+            return applicationSettingsConfiguration.Get<AppConfiguration>();
+        }
+
+        #region Configure Application
+        
+        private static void Initialize(this IApplicationBuilder app)
+        {
+            using var serviceScope = app.ApplicationServices.CreateScope();
+            var initializers = serviceScope.ServiceProvider.GetServices<ISeeder>();
+
+            foreach (var initializer in initializers)
+            {
+                initializer.Seed();
+            }
+        }
+
+        #endregion
 
     }
 }
