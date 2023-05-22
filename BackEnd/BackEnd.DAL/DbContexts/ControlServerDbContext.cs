@@ -17,6 +17,7 @@ namespace BackEnd.DAL.DbContexts
         
         public DbSet<ParkingSpot> ParkingSpots { get; set; }
         public DbSet<Runaway> Runaways { get; set; }
+        public DbSet<AircraftLocation> AircraftLocations { get; set; }
         public DbSet<AircraftIntent> AircraftIntents { get; set; }
 
         #endregion
