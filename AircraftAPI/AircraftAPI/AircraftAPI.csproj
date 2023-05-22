@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\AircraftAPI.Infrastructure\AircraftAPI.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\BackEnd\BackEnd.Infrastructure\BackEnd.Infrastructure.csproj" />
     <ProjectReference Include="..\AircraftAPI.Shared\AircraftAPI.Shared.csproj" />
   </ItemGroup>
 
