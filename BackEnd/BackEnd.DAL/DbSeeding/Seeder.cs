@@ -104,8 +104,15 @@ namespace BackEnd.DAL.DbSeeding
                         IsSmall = false
                     });
             }
-
-            AddParkingSpots(smallSpots.Concat(largeSpots));
+            
+            foreach (var parkingSpot in smallSpots)
+            {
+                AddParkingSpots(parkingSpot);
+            }
+            foreach (var parkingSpot in largeSpots)
+            {
+                AddParkingSpots(parkingSpot);
+            }
         }
 
         private void AddRole(ApplicationRole role)
@@ -134,26 +141,19 @@ namespace BackEnd.DAL.DbSeeding
             }
         }
 
-        private void AddRunaway(Runaway runaway)
+        private async void AddRunaway(Runaway runaway)
         {
-            Task.Run(async () =>
-            {
-                if (!await dbContext.Runaways.AnyAsync(r => r.Id == runaway.Id))
-                    await dbContext.Runaways.AddAsync(runaway);
-            });
+            if (!await dbContext.Runaways.AnyAsync(r => r.Id == runaway.Id))
+                await dbContext.Runaways.AddAsync(runaway);
         }
 
-        private void AddParkingSpots(IEnumerable<ParkingSpot> spots)
+        private void AddParkingSpots(ParkingSpot spot)
         {
+            var exists = dbContext.ParkingSpots.ToList().Any(r => r.Id == spot.Id);
             Task.Run(async () =>
             {
-                foreach (var location in spots)
-                {
-                    if (!await dbContext.ParkingSpots.AnyAsync(p => p.Id == location.Id))
-                    {
-                        await dbContext.ParkingSpots.AddAsync(location);
-                    }
-                }
+                if (!exists)
+                    await dbContext.ParkingSpots.AddAsync(spot);
             }).GetAwaiter().GetResult();
         }
     }

@@ -2,7 +2,8 @@ using AircraftAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.ConfigureServices();
+var config = builder.Configuration;
+builder.Services.ConfigureServices(config);
 
 var app = builder.Build();
 

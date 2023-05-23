@@ -18,16 +18,17 @@ namespace AircraftAPI.Controllers
         private readonly HttpContextAccessor contextAccessor;
         private readonly IMediator mediator;
         private readonly IMapper mapper;
+        private readonly HttpContext context;
 
         private string callSign;
 
-        public AircraftController(HttpContextAccessor contextAccessor, IMediator mediator, IMapper mapper)
+        public AircraftController(IMediator mediator, IMapper mapper)
         {
-            this.contextAccessor = contextAccessor;
+            context = HttpContext;
             this.mediator = mediator;
             this.mapper = mapper;
 
-            callSign = contextAccessor?.HttpContext?.Request.Headers.RetrieveCallSign();
+            callSign = context.Request.Headers.RetrieveCallSign();
         }
 
         [HttpGet(Name = AircraftEndpoints.SendLocation)]
@@ -41,7 +42,8 @@ namespace AircraftAPI.Controllers
             return HttpStatusCode.Conflict;
         }
 
-        [HttpPost($"{AircraftEndpoints.Intents}/{{intent}}")]
+        //[HttpPost($"{AircraftEndpoints.Intents}/{{intent}}")]
+        [HttpPost("intent/{intent}")]
         public async Task<HttpStatusCode> SendIntent(string intent)
         {
             var passed = Enum.TryParse(intent, out IntentType intentType);

@@ -1,5 +1,4 @@
-﻿using AdminUI.Server.Services;
-using BackEnd.DAL.DbContexts;
+﻿using BackEnd.DAL.DbContexts;
 using BackEnd.DAL.DbSeeding;
 using BackEnd.DataDomain.Entities;
 using BackEnd.Infrastructure.Services;
@@ -11,6 +10,7 @@ using Quartz;
 using Shared.ConfigurationOptions;
 using Shared.Extensions;
 using Shared.Interfaces;
+using Shared.Services;
 
 namespace AdminUI.Server.Extensions
 {
@@ -95,8 +95,8 @@ namespace AdminUI.Server.Extensions
 
         private static void AddBackEndServices(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
 
         private static void ConfigureQuartz(this IServiceCollection services)

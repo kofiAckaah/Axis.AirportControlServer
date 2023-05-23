@@ -8,12 +8,15 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AircraftAPI\AircraftAPI.Shared\AircraftAPI.Shared.csproj" />
+    <ProjectReference Include="..\BackEnd\BackEnd.DAL\BackEnd.DAL.csproj" />
     <ProjectReference Include="..\BackEnd\BackEnd.Shared\BackEnd.Shared.csproj" />
     <ProjectReference Include="..\Shared\Shared\Shared.csproj" />
   </ItemGroup>

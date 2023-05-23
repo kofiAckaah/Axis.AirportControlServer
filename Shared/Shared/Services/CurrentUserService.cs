@@ -1,7 +1,8 @@
-﻿using Shared.Interfaces;
+﻿using Microsoft.AspNetCore.Http;
+using Shared.Interfaces;
 using System.Security.Claims;
 
-namespace AdminUI.Server.Services
+namespace Shared.Services
 {
     public class CurrentUserService : ICurrentUserService
     {
