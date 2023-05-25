@@ -1,4 +1,5 @@
-﻿using BackEnd.DAL.DbContexts;
+﻿using AdminUI.Infrastructure.Jobs;
+using BackEnd.DAL.DbContexts;
 using BackEnd.DAL.DbSeeding;
 using BackEnd.DataDomain.Entities;
 using BackEnd.Infrastructure.Services;
@@ -7,10 +8,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
+using Quartz.Impl;
 using Shared.ConfigurationOptions;
 using Shared.Extensions;
 using Shared.Interfaces;
 using Shared.Services;
+using static Quartz.Logging.OperationName;
 
 namespace AdminUI.Server.Extensions
 {
@@ -30,7 +33,7 @@ namespace AdminUI.Server.Extensions
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.ConfigureQuartz();
+            services.ConfigureQuartzAsync();
             return services;
         }
 
@@ -99,9 +102,36 @@ namespace AdminUI.Server.Extensions
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
 
-        private static void ConfigureQuartz(this IServiceCollection services)
+        private static async Task ConfigureQuartzAsync(this IServiceCollection services)
         {
-            services.AddQuartz();
+            services.AddQuartz(q =>
+            {
+                q.UseMicrosoftDependencyInjectionJobFactory();
+                var jobKey = new JobKey(nameof(LandingJob));
+                q.AddJob<LandingJob>(opts => opts.WithIdentity(jobKey));
+
+                q.AddTrigger(opts => opts
+                    .ForJob(jobKey)
+                    .WithIdentity("landing-trigger")
+                    .WithCronSchedule("0 0/1 * 1/1 * ? *"));
+            });
+            services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
+
+            services.AddTransient<LandingJob>();
+            // Register job dependencies
+            //services.AddTransient<IFoo, Foo>();
+            var container = services.BuildServiceProvider();
+
+            // Create an instance of the job factory
+            var jobFactory = new JobFactory(container);
+
+            // Create a Quartz.NET scheduler
+            var schedulerFactory = new StdSchedulerFactory();
+            var scheduler = await schedulerFactory.GetScheduler();
+
+            // Tell the scheduler to use the custom job factory
+            scheduler.JobFactory = jobFactory;
         }
 
         private static AppConfiguration GetApplicationSettings(
