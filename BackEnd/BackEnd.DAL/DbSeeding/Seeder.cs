@@ -47,6 +47,8 @@ namespace BackEnd.DAL.DbSeeding
             dbContext.Database.Migrate();
             SeedUser();
             SeedProjectEntities();
+
+            dbContext.SaveChanges();
         }
 
         private void SeedUser()

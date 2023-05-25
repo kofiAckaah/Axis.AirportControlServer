@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Shared.ConfigurationOptions;
 using Shared.Interfaces;
 using Shared.Services;
+using AircraftAPI.Infrastructure.Constant;
 
 namespace AircraftAPI.Extensions
 {
@@ -20,6 +21,7 @@ namespace AircraftAPI.Extensions
             services.ConfigureAuth();
 
             services.AddControllers();
+            services.ConfigureSettings(config);
             services.AddApplicationServices();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
@@ -36,7 +38,6 @@ namespace AircraftAPI.Extensions
             services.AddOptions();
             services.AddDbContext<AircraftAPIDbContext>(options
                 => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-            //services.AddScoped<ISeeder, Seeder>();
         }
         private static void ConfigureAuth(this IServiceCollection services)
         {
@@ -44,16 +45,17 @@ namespace AircraftAPI.Extensions
             services.AddDataProtection();
         }
 
+        private static void ConfigureSettings(this IServiceCollection services, IConfiguration config)
+        {
+            services.Configure<AppConfiguration>(config.GetSection(GlobalConstants.ConfigSettingsName));
+            services.AddOptions();
+
+        }
         private static void AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IIntentService, IntentService>();
-        }
-
-        private static void ConfigureQuartz(this IServiceCollection services)
-        {
-            //services.AddQuartz();
         }
     }
 }

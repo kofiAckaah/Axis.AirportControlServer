@@ -1,6 +1,7 @@
 ﻿using AircraftAPI.Shared.Constants;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using AircraftAPI.Infrastructure.Attributes;
 using AircraftAPI.Infrastructure.Commands;
 using AircraftAPI.Infrastructure.Extensions;
 using AircraftAPI.Infrastructure.Queries;
@@ -13,27 +14,30 @@ namespace AircraftAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [VerifyPublicKey]
     public class AircraftController : ControllerBase
     {
-        private readonly HttpContextAccessor contextAccessor;
         private readonly IMediator mediator;
         private readonly IMapper mapper;
         private readonly HttpContext context;
 
         private string callSign;
 
-        public AircraftController(IMediator mediator, IMapper mapper)
+        public AircraftController(IMediator mediator, IMapper mapper, IHttpContextAccessor context)
         {
-            context = HttpContext;
+            this.context = context.HttpContext;
             this.mediator = mediator;
             this.mapper = mapper;
 
-            callSign = context.Request.Headers.RetrieveCallSign();
         }
 
-        [HttpGet(Name = AircraftEndpoints.SendLocation)]
+        [HttpPost(AircraftEndpoints.SendLocation)]
         public async Task<HttpStatusCode> SendLocation(AircraftLocationRequest request)
         {
+            callSign = context.Request.Headers.RetrieveCallSign();
+            if (string.IsNullOrEmpty(callSign))
+                return HttpStatusCode.Conflict;
+
             var command = mapper.Map<SaveLocationCommand>(request);
             command.CallSign = callSign;
             if (await mediator.Send(command))
@@ -42,22 +46,25 @@ namespace AircraftAPI.Controllers
             return HttpStatusCode.Conflict;
         }
 
-        //[HttpPost($"{AircraftEndpoints.Intents}/{{intent}}")]
-        [HttpPost("intent/{intent}")]
+        [HttpPost($"{AircraftEndpoints.Intents}/{{intent}}")]
         public async Task<HttpStatusCode> SendIntent(string intent)
         {
-            var passed = Enum.TryParse(intent, out IntentType intentType);
-            if (passed)
-            {
-                var result = await mediator.Send(new AircraftIntentQuery()
-                {
-                    CallSign = callSign, 
-                    Intent = intentType
-                });
+            callSign = context.Request.Headers.RetrieveCallSign();
+            if (string.IsNullOrEmpty(callSign))
+                return HttpStatusCode.Conflict;
 
-                return result.ToStatusCode();
+            var passed = Enum.TryParse(intent, true, out IntentType intentType);
+            if (!passed)
+            {
+                return HttpStatusCode.Conflict;
             }
-            return HttpStatusCode.Conflict;
+            var result = await mediator.Send(new AircraftIntentQuery()
+            {
+                CallSign = callSign,
+                Intent = intentType
+            });
+
+            return result.ToStatusCode();
         }
     }
 }

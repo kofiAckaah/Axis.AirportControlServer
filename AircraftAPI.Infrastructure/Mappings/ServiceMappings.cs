@@ -1,4 +1,5 @@
 ﻿using AircraftAPI.Infrastructure.Commands;
+using AircraftAPI.Infrastructure.Requests;
 using AutoMapper;
 using BackEnd.DataDomain.Entities;
 
@@ -8,7 +9,8 @@ namespace AircraftAPI.Infrastructure.Mappings
     {
         public ServiceMappings()
         {
-            CreateMap<SaveLocationCommand, AircraftLocation>().ReverseMap();
+            CreateMap<SaveLocationCommand, AircraftLocationRequest>().ReverseMap();
+            CreateMap<AircraftLocation, SaveLocationCommand>().ReverseMap();
         }
     }
 }

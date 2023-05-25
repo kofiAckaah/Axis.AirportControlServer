@@ -30,17 +30,26 @@ namespace AircraftAPI.Infrastructure.Queries
                 switch (request.Intent)
                 {
                     case IntentType.Approach:
-                        return intentService.CanApproach() ? ApiResponseType.Success : ApiResponseType.Failure;
+                        return await intentService.CanApproachAsync(cancellationToken) ? ApiResponseType.Success : ApiResponseType.Failure;
                     case IntentType.Parking:
                         break;
+                    case IntentType.Cancel:
+                        await intentService.CancelApproachAsync(cancellationToken);
+                        return ApiResponseType.Success;
                     case IntentType.TakeOff:
-                        break;
+                        return await intentService.TakeOff(cancellationToken) ? ApiResponseType.Success : ApiResponseType.Failure;
+                    case IntentType.CanTakeOff:
+                        return await intentService.CanTakeOff(cancellationToken) ? ApiResponseType.Success : ApiResponseType.Failure;
+                    case IntentType.CancelTakeOff:
+                        await intentService.CancelTakeOff(cancellationToken);
+                        return ApiResponseType.Success;
                 }
 
                 return ApiResponseType.Failure;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 return ApiResponseType.Failure;
             }
         }

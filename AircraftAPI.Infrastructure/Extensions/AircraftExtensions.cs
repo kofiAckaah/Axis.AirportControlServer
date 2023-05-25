@@ -10,9 +10,9 @@ namespace AircraftAPI.Infrastructure.Extensions
 {
     public static class AircraftExtensions
     {
-        public static string RetrieveCallSign(this IHeaderDictionary headers)
+        public static string? RetrieveCallSign(this IHeaderDictionary headers)
         {
-            if (headers.Any())
+            if (!headers.Any())
                 return string.Empty;
 
             var callSign = headers.TryGetValue("call_sign", out var vals);
@@ -21,18 +21,13 @@ namespace AircraftAPI.Infrastructure.Extensions
 
         public static HttpStatusCode ToStatusCode(this ApiResponseType intentType)
         {
-            switch (intentType)
+            return intentType switch
             {
-                case ApiResponseType.Success:
-                    return HttpStatusCode.NoContent;
-                case ApiResponseType.Unauthorized:
-                    return HttpStatusCode.Unauthorized;
-                case ApiResponseType.BadRequest:
-                    return HttpStatusCode.BadRequest;
-                case ApiResponseType.Failure:
-                default:
-                    return HttpStatusCode.Conflict;
-            }
+                ApiResponseType.Success => HttpStatusCode.NoContent,
+                ApiResponseType.Unauthorized => HttpStatusCode.Unauthorized,
+                ApiResponseType.BadRequest => HttpStatusCode.BadRequest,
+                _ => HttpStatusCode.Conflict,
+            };
         }
     }
 }
