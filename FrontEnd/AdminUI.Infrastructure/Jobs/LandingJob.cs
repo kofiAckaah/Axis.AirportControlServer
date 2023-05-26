@@ -1,5 +1,4 @@
-﻿using BackEnd.DataDomain.Entities;
-using BackEnd.Shared.Interfaces;
+﻿using AdminUI.Shared.Interfcaes;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 
@@ -14,8 +13,8 @@ namespace AdminUI.Infrastructure.Jobs
         }
         public Task Execute(IJobExecutionContext context)
         {
-            var work = serviceProvider.GetRequiredService<IUnitOfWork>();
-            var run = work.Repository<Runaway>().GetAllEntities;
+            var groundCrew = serviceProvider.GetRequiredService<IGroundCrewService>();
+            groundCrew.ParkAirplane();
             return Task.CompletedTask;
         }
     }

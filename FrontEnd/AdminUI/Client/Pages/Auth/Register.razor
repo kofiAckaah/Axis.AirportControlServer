@@ -1,0 +1,29 @@
+﻿@page "/register"
+
+
+<MudGrid Justify="Justify.Center">
+    <EditForm Model="registerRequest" OnValidSubmit="SubmitOnValid">
+        <MudGrid>
+            <MudItem xs="12" sm="12">
+                <MudCard>
+                    <MudCardContent>
+                        <MudTextField Label="Username" Placeholder="Enter Username" Class="mt-3"
+                                      @bind-Value="registerRequest.Username" For="@(() => registerRequest.Username)" />
+                        <MudTextField Label="Password" Placeholder="Enter password" HelperText="Choose a strong password" Class="mt-3"
+                                      @bind-Value="registerRequest.Password" For="@(() => registerRequest.Password)" InputType="InputType.Password" />
+                        <MudTextField Label="Password" HelperText="Repeat the password" Placeholder="Confirm Password" Class="mt-3"
+                                      @bind-Value="registerRequest.ConfirmPassword" For="@(() => registerRequest.ConfirmPassword)" InputType="InputType.Password" />
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudGrid Justify="Justify.Center" Class="ma-5">
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled"
+                                       Color="Color.Primary" Class="ml-auto">
+                                Register
+                            </MudButton>
+                        </MudGrid>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
+</MudGrid>

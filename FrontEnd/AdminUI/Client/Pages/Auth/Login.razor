@@ -1,0 +1,26 @@
+﻿@page "/login"
+
+
+
+<MudGrid Justify="Justify.Center" Class="ma-3">
+    <EditForm Model="loginRequest" OnValidSubmit="SubmitOnValid">
+        <MudItem xs="12" md="12">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Username" Placeholder="Enter Username" Class="mt-3"
+                                  @bind-Value="loginRequest.Username" For="@(() => loginRequest.Username)" />
+                    <MudTextField Label="Password" Placeholder="Enter password" Class="mt-3"
+                                  @bind-Value="loginRequest.Password" For="@(() => loginRequest.Password)" InputType="InputType.Password" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudGrid Justify="Justify.Center" Class="ma-5">
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled"
+                                   Color="Color.Primary">
+                            Register
+                        </MudButton>
+                    </MudGrid>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </EditForm>
+</MudGrid>

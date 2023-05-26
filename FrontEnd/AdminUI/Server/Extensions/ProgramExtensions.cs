@@ -1,4 +1,6 @@
 ﻿using AdminUI.Infrastructure.Jobs;
+using AdminUI.Infrastructure.Services;
+using AdminUI.Shared.Interfcaes;
 using BackEnd.DAL.DbContexts;
 using BackEnd.DAL.DbSeeding;
 using BackEnd.DataDomain.Entities;
@@ -56,7 +58,10 @@ namespace AdminUI.Server.Extensions
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
-            app.UseRouting();
+            app.UseRouting(); 
+            
+            app.UseAuthentication();
+            app.UseAuthorization();
 
 
             app.MapRazorPages();
@@ -93,6 +98,15 @@ namespace AdminUI.Server.Extensions
         private static void ConfigureAuth(this IServiceCollection services)
         {
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = false;
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
+            });
             services.AddDataProtection();
         }
 
@@ -100,6 +114,9 @@ namespace AdminUI.Server.Extensions
         {
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IGroundCrewService, GroundCrewService>();
+
+            services.AddScoped<IAdminManager, AdminManager>();
         }
 
         private static async Task ConfigureQuartzAsync(this IServiceCollection services)
@@ -119,8 +136,6 @@ namespace AdminUI.Server.Extensions
 
 
             services.AddTransient<LandingJob>();
-            // Register job dependencies
-            //services.AddTransient<IFoo, Foo>();
             var container = services.BuildServiceProvider();
 
             // Create an instance of the job factory

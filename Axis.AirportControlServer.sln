@@ -33,9 +33,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AircraftAPI", "AircraftAPI"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AircraftAPI", "AircraftAPI\AircraftAPI\AircraftAPI.csproj", "{2F6E42E8-2CC3-4569-82D0-5CB6A0367592}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftAPI.Shared", "AircraftAPI\AircraftAPI.Shared\AircraftAPI.Shared.csproj", "{EDE1A900-6B1A-4ECC-8757-8D7A2F379120}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AircraftAPI.Shared", "AircraftAPI\AircraftAPI.Shared\AircraftAPI.Shared.csproj", "{EDE1A900-6B1A-4ECC-8757-8D7A2F379120}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftAPI.Infrastructure", "AircraftAPI.Infrastructure\AircraftAPI.Infrastructure.csproj", "{F960AD40-4633-4E11-A851-2BFE7702B6BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AircraftAPI.Infrastructure", "AircraftAPI.Infrastructure\AircraftAPI.Infrastructure.csproj", "{F960AD40-4633-4E11-A851-2BFE7702B6BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

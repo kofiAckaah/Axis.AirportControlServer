@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using Quartz.Spi;
-using System;
 using System.Collections.Concurrent;
 
 namespace AdminUI.Infrastructure.Jobs
